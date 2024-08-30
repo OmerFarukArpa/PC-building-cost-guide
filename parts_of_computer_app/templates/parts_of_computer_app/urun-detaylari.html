@@ -1,0 +1,296 @@
+{% extends 'parts_of_computer_app/home.html' %}
+
+{% block page_title %}
+    Ürün Detayları
+{% endblock %}
+
+{% block categories %}
+  <div class="list-group">
+      {% for category, category_name in category_name_mapping.items %}
+          <a href="{% url 'parts_of_computer_app:ProductsByCategory' category %}" class="list-group-item list-group-item-action">{{ category_name }}</a>
+      {% endfor %}
+  </div>
+
+{% endblock %}
+
+{% block products %}
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    
+    
+        <div class="card" style="width: 21rem; float: none; margin-left: 4%;">
+            <img src={{ product.image_url }} alt={{ name }} width="250" height="250" class="card-img-top" alt={{ name }}>
+            <div class="card-body">
+                <h5 class="card-title">{{ product.price }} TL</h5>
+                <p class="card-text">{{ product.name }}</p>
+
+                <a href="{% url 'parts_of_computer_app:add_to_cart' product.id %}" class="btn btn-primary" onclick="showNotification(parseInt('{{ product.id }}'))">Ekle</a>
+            </div>
+            
+        </div>
+        {% if product.category_id == 1 %}
+        <div class="table-container mt-5" style="float: right; margin-left: 4%; ">
+            <table>
+                <h3> Ürün Özellikleri </h3>
+                <tr>
+                    <td><strong>Model:</strong></td>
+                    <td>{{ product.ProcessorFeature.processor_Model }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Üretici Firma:</strong></td>
+                    <td>{{ product.ProcessorFeature.processor_Manufacturer }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Soket Tipi:</strong></td>
+                    <td>{{ product.ProcessorFeature.processor_Socket_Type }}</td>
+                </tr>
+                <tr>
+                    <td><strong>İşlemci Serisi:</strong></td>
+                    <td>{{ product.ProcessorFeature.processor_Series }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Çekirdek Sayısı:</strong></td>
+                    <td>{{ product.ProcessorFeature.core_Count }}</td>
+                </tr>
+            </table>
+        </div>
+
+        {% elif product.category_id == 2 %}
+        <div class="table-container mt-5" style="float: right; margin-left: 4%; ">
+            <table>
+                <h3> Ürün Özellikleri </h3>
+                <tr>
+                    <td><strong>Soket Tipi:</strong></td>
+                    <td>{{ product.MotherboardFeature.processor_Socket_Type }}</td>
+                </tr>
+                <tr>
+                    <td><strong>RAM Tipi:</strong></td>
+                    <td>{{ product.MotherboardFeature.ram_Type }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Uyumlu İşlemciler:</strong></td>
+                    <td>{{ product.MotherboardFeature.compatible_Processors }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Anakart Boyutu:</strong></td>
+                    <td>{{ product.MotherboardFeature.motherboard_Size }}</td>
+                </tr>
+            </table>
+        </div>
+
+        {% elif product.category_id == 3 %}
+            <div class="table-container mt-5" style="float: right; margin-left: 4%; ">
+                <table>
+                    <h3> Ürün Özellikleri </h3>
+                    <tr>
+                        <td><strong>RAM Tipi:</strong></td>
+                        <td>{{ product.RamFeature.ram_Type }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RAM Kapasitesi:</strong></td>
+                        <td>{{ product.RamFeature.ram_Capacity }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Frekans:</strong></td>
+                        <td>{{ product.RamFeature.ram_Frequency }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kanallı Tip:</strong></td>
+                        <td>{{ product.RamFeature.channel_Type }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Uyumluluk:</strong></td>
+                        <td>{{ product.RamFeature.ram_Compatibility }}</td>
+                    </tr>
+                </table>
+            </div>
+        {% elif product.category_id == 4 %}
+        <div class="table-container mt-5" style="float: right; margin-left: 4%; ">
+            <table>
+                <h3> Ürün Özellikleri </h3>
+                <tr>
+                    <td><strong>Üretici Firma:</strong></td>
+                    <td>{{ product.GraphicsCardFeature.gpu_Manufacturer }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Model:</strong></td>
+                    <td>{{ product.GraphicsCardFeature.gpu_Model }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Bellek Tipi:</strong></td>
+                    <td>{{ product.GraphicsCardFeature.memory_Type }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Bellek Kapasitesi:</strong></td>
+                    <td>{{ product.GraphicsCardFeature.gpu_Memory_Capacity }}</td>
+                </tr>
+            </table>
+        </div>
+
+        {% elif product.category_id == 5 %}
+            <div class="table-container mt-5" style="float: right; margin-left: 4%; ">
+                <table>
+                    <h3> Ürün Özellikleri </h3>
+                    <tr>
+                        <td><strong>Kasa Tipi:</strong></td>
+                        <td>{{ product.ComputerCaseFeature.case_Type }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PSU Dahil:</strong></td>
+                        <td>{{ product.ComputerCaseFeature.PSU }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PSU Konumu:</strong></td>
+                        <td>{{ product.ComputerCaseFeature.PSU_Location }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Şeffaf Kasa:</strong></td>
+                        <td>{{ product.ComputerCaseFeature.transparent_Case }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tür:</strong></td>
+                        <td>{{ product.ComputerCaseFeature.type_C }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            {% elif product.category_id == 6 %}
+                <div class="table-container mt-5" style="float: right; margin-left: 4%; ">
+                    <table>
+                        <h3> Ürün Özellikleri </h3>
+                        <tr>
+                            <td><strong>Uyumlu Soketler:</strong></td>
+                            <td>{{ product.CoolerFeature.compatible_Sockets }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Soğutma Tipi:</strong></td>
+                            <td>{{ product.CoolerFeature.cooling_Type }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LED:</strong></td>
+                            <td>{{ product.CoolerFeature.led }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Radyatör Boyutu:</strong></td>
+                            <td>{{ product.CoolerFeature.radiator_Size }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fan Sayısı:</strong></td>
+                            <td>{{ product.CoolerFeature.fan_Count }}</td>
+                        </tr>
+                    </table>
+                </div>
+            {% elif product.category_id == 7 %}
+                <div class="table-container mt-5" style="float: right; margin-left: 4%; ">
+                    <table>
+                        <h3> Ürün Özellikleri </h3>
+                        <tr>
+                            <td><strong>Soğutma Tipi:</strong></td>
+                            <td>{{ product.CaseFanFeature.cooling_Type }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fan Sayısı:</strong></td>
+                            <td>{{ product.CaseFanFeature.fan_Count }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LED Tipi:</strong></td>
+                            <td>{{ product.CaseFanFeature.led_Type }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Güç Bağlantısı:</strong></td>
+                            <td>{{ product.CaseFanFeature.power_Connector }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RPM:</strong></td>
+                            <td>{{ product.CaseFanFeature.rpm }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+
+                {% elif product.category_id == 9 %}
+                <div class="table-container mt-5" style="float: right; margin-left: 4%; ">
+                    <table>
+                        <h3> Ürün Özellikleri </h3>
+                        <tr>
+                            <td><strong>Bağlantı Tipi:</strong></td>
+                            <td>{{ product.KeyboardFeature.connection_Type }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mekanik:</strong></td>
+                            <td>{{ product.KeyboardFeature.mechanical }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Klavye Düzeni:</strong></td>
+                            <td>{{ product.KeyboardFeature.keyboard_Layout }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Yazı Desteği:</strong></td>
+                            <td>{{ product.KeyboardFeature.wrist_Support }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Numerik Tuş Takımı:</strong></td>
+                            <td>{{ product.KeyboardFeature.numpad }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                {% elif product.category_id == 10 %}
+                <div class="table-container mt-5" style="float: right; margin-left: 4%; ">
+                    <table>
+                        <h3> Ürün Özellikleri </h3>
+                        <tr>
+                            <td><strong>Ekran Boyutu:</strong></td>
+                            <td>{{ product.MonitorFeature.screen_Size }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Çözünürlük:</strong></td>
+                            <td>{{ product.MonitorFeature.resolution }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Yenileme Hızı:</strong></td>
+                            <td>{{ product.MonitorFeature.refresh_Rate }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pano Tipi:</strong></td>
+                            <td>{{ product.MonitorFeature.panel_Type }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Yanıt Süresi:</strong></td>
+                            <td>{{ product.MonitorFeature.response_Time }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                {% elif product.category_id == 11 %}
+                <div class="table-container mt-5" style="float: right; margin-left: 4%; ">
+                    <table>
+                        <h3> Ürün Özellikleri </h3>
+                        <tr>
+                            <td><strong>Bağlantı Tipi:</strong></td>
+                            <td>{{ product.MouseFeature.connection_Type }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Takip Tipi:</strong></td>
+                            <td>{{ product.MouseFeature.tracking_Type }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tuş Sayısı:</strong></td>
+                            <td>{{ product.MouseFeature.button_Count }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kullanım Tipi:</strong></td>
+                            <td>{{ product.MouseFeature.usage_Type }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Maksimum DPI:</strong></td>
+                            <td>{{ product.MouseFeature.max_DPI }}</td>
+                        </tr>
+                    </table>
+                </div>
+    {% endif %}
+    
+    
+</div>
+
+
+{% endblock %}

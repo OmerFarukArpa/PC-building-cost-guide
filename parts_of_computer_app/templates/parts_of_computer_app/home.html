@@ -1,0 +1,52 @@
+{% extends 'parts_of_computer_app/layout.html' %}
+{% block page_title %}
+    Anasayfa
+{% endblock %}
+
+{% block categories %}
+  <div class="list-group">
+      {% for category, category_name in category_name_mapping.items %}
+          <a href="{% url 'parts_of_computer_app:ProductsByCategory' category %}" class="list-group-item list-group-item-action">{{ category_name }}</a>
+      {% endfor %}
+  </div>
+
+{% endblock %}
+
+
+      {% block products %}
+
+                  {% load static %}
+          
+                      <img src={% static "img/Home.png" %} alt="img" class="img-fluid" >
+          
+                  {% if no_results %}
+                  <p>Üzgünüz, "{{ search_query }}" için bir sonuç bulunamadı.</p>
+                  {% endif %}
+      {% endblock %}
+          
+
+      
+
+
+
+
+<!--
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    
+    {% for product in products %}
+        
+        <div class="card" style="width: 18rem; float: left; margin: 2%;">
+            <img src={{ product.image_url }} alt={{ name }} width="250" height="250" class="card-img-top" alt={{ name }}>
+            <div class="card-body">
+                <h5 class="card-title">{{ product.price }} TL</h5>
+                <p class="card-text">{{ product.name }}</p>
+                
+                <a href="#" class="btn btn-primary" onclick="showNotification(parseInt('{{ product.id }}'))">Ekle</a>
+                <a href="{% url 'parts_of_computer_app:urun-detaylari' id=product.id %}" class="btn btn-warning" >Detaylar</a>
+
+            </div>
+            
+        </div>
+    {% endfor %}
+</div> 
+-->

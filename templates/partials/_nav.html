@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-md fixed-top bg-dark navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" aria-disabled="true">Bilgisayar Parçaları</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'parts_of_computer_app:home' %}">Anasayfa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'parts_of_computer_app:contact'%}">İletişim</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'parts_of_computer_app:about_us' %}">Hakkımızda</a>
+        </li>
+        {% if not user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Giriş Yap</a>
+        </li>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'parts_of_computer_app:sepet_detay' %}">
+            <i class="fas fa-shopping-cart"></i> sepetim
+          </a>
+        </li>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <form method="post" action="{% url 'logout' %}?next=/">
+            {% csrf_token %}
+            <button type="submit" class="nav-link" style="border: none; background: none;">Çıkış Yap</button>
+          </form>
+        </li>
+        {% endif %}
+        {% if not user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'parts_of_computer_app:signup' %}">Kayıt Ol</a>
+        </li>
+        {% endif %}
+
+
+      </ul>
+
+      
+      <form class="d-flex ms-3" role="search" method="get" action="{% url 'parts_of_computer_app:product_by_search' %}">
+        <input class="form-control me-2" type="search" placeholder="Ara" aria-label="Search" name="ara">
+        <button class="btn btn-outline-success" type="submit">Ara</button>
+      </form>
+    </div>
+  </div>
+</nav>

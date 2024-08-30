@@ -1,0 +1,17 @@
+from django.contrib import admin
+from parts_of_computer_app.models import Category
+from parts_of_computer_app.models import Product
+from parts_of_computer_app.models import MotherboardFeature
+from parts_of_computer_app.models import ComputerCaseFeature
+from parts_of_computer_app.models import GraphicsCardFeature
+from parts_of_computer_app.models import ProcessorFeature
+from parts_of_computer_app.models import CaseFanFeature
+from parts_of_computer_app.models import KeyboardFeature
+from parts_of_computer_app.models import MonitorFeature
+from parts_of_computer_app.models import MouseFeature
+from parts_of_computer_app.models import RamFeature
+from parts_of_computer_app.models import CoolerFeature
+
+# Register your models here.
+admin.site.register([Category,Product,MotherboardFeature,ComputerCaseFeature,GraphicsCardFeature,ProcessorFeature,CaseFanFeature,KeyboardFeature,MonitorFeature,MouseFeature,RamFeature,CoolerFeature])
+

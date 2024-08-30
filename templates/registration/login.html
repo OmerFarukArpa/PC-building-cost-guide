@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    Login
+{% endblock %}
+
+{% block content %}
+  {% if form.errors %}
+    <p>Kullanıcı adınız ve şifreniz eşleşmedi. Lütfen tekrar deneyiniz.</p>
+  {% endif %}
+
+  {% if user.is_authenticated %}
+  <div class="d-flex justify-content-center">
+    <h2 style="padding: 10px">Hoşgeldiniz  {{ user.username }}</h2>
+</div>
+  {% else %}
+    <div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-4 shadow">
+          <div class="modal-header p-5 pb-4 border-bottom-0">
+            <h1 class="fw-bold mb-0 fs-2">Kullanıcı Girişi</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body p-5 pt-0">
+            <form method="POST" action="{% url 'login' %}">
+              {% csrf_token %}
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control rounded-3" id="username" name="username" required>
+                <label for="username">Kullanıcı Adı</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control rounded-3" id="floatingPassword" name="password" required>
+                <label for="floatingPassword">Şifre</label>
+              </div>
+              <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Giriş Yap</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

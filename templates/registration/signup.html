@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    Kayıt Ol
+{% endblock %}
+
+{% block content%}
+<!--
+  <div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+          <h1 class="fw-bold mb-0 fs-2">Sign up for free</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-5 pt-0">
+          <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="username" name="username" >
+              <label for="username">Kullanıcı Adı</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
+              <label for="floatingPassword">Şifre</label>
+            </div>
+            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Kayıt Ol</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class = "login">  
+  
+    {% if messages %}  
+        <ul>   
+            {% for message in messages %}  
+                <li>{{ message }}</li>  
+                {% endfor %}  
+        </ul>   
+    {% endif %}  
+      
+    <h1>Register Here - JavaTpoint Blog</h1>  
+  
+         <form method="post" >  
+             {% csrf_token %}  
+             <table>  
+                {{ form.as_table }}  
+                 <tr>  
+                    <td></td>  
+                    <td><input type="submit" name="submit" value="Register" /></td>  
+                </tr>  
+             </table>  
+         </form>  
+     </div>  
+  -->
+  <div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-0 fs-2">Ücretsiz Kayıt Ol</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-5 pt-0">
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for field, errors in form.errors.items %}
+                                    <ul>
+                                        {% for error in errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-3" id="username" name="username" placeholder="Kullanıcı Adı">
+                        <label for="username">Kullanıcı Adı</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control rounded-3" id="password1" name="password1" placeholder="Şifre">
+                        <label for="password1">Şifre</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control rounded-3" id="password2" name="password2" placeholder="Şifreyi Onayla">
+                        <label for="password2">Şifreyi Onayla</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control rounded-3" id="email" name="email" placeholder="Email">
+                        <label for="email">Email</label>
+                    </div>
+                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Kayıt Ol</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+{%endblock%}
